@@ -1,4 +1,4 @@
-# maskew
+# Maskew
 # Skew the shapes of DOM elements
 # Dan Motzenbecker
 # http://oxism.com
