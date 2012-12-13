@@ -1,0 +1,108 @@
+@import 'nib'
+
+$red = #ff5470
+$yellow = #fff147
+
+@keyframes morph-color
+  from
+    background-color: $yellow
+
+  to
+    background-color: $red
+
+
+html
+  font-size: 100%
+  background-color: #222
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
+
+
+body
+  padding: 3.125rem
+
+
+h1
+  font-family: Futura, "Helvetica Neue", Arial, Helvetica, sans-serif
+  font-weight: bolder
+  display: none
+  font-size: 8.75rem
+  background-color: #fff147
+  color: #222
+  text-align: center
+  box-sizing: border-box
+  margin: 0.2rem
+  line-height: 1.4
+  width: 12.5rem
+  height: 12.5rem
+  animation: morph-color 5s infinite
+  animation-direction: alternate
+
+  &.photo
+    color: transparent
+    background-color: transparent
+    background-image: url('k2.jpg')
+    background-size: 250px
+    background-position: center
+
+
+.row
+  margin-bottom: 1.4rem
+
+
+section
+  margin-bottom: 3rem
+
+
+h3
+  color: $red
+
+
+.demo
+  width: 245px
+  height: 301px
+  background-size: 245px 301px
+  display: inline-block
+  margin: 1rem
+
+#demo1
+  background-image: url('1.jpg')
+
+#demo2
+  background-image: url('2.jpg')
+
+#demo3
+  background-image: url('3.jpg')
+
+span
+  background-color: #eee
+  font-size: 1.875rem
+  color: #222
+  font-weight: bold
+  letter-spacing: -2px
+  padding: 0.625rem
+  margin: 0.625rem
+  display: inline-block
+
+
+a, em
+  color: #888
+  text-decoration: none
+  font-style: normal
+
+
+a
+  color: $red
+  transition: color .33s
+
+  &:hover
+    color: #222
+
+
+pre
+  background-color: #444
+  color: #ddd
+  font-size: 1.1rem
+  margin: 0.8rem
+  padding: 1rem
+  overflow: auto
+

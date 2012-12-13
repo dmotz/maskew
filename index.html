@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Dan Motzenbecker">
+    <title>Maskew - a javascript library for skewing the shapes of elements</title>
+    <link href="demo/demo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <section>
+        <div class="row">
+            <h1 class="photo">.</h1>
+            <h1>M</h1>
+            <h1>A</h1>
+            <h1>S</h1>
+        </div>
+        <div class="row">
+            <h1>K</h1>
+            <h1>E</h1>
+            <h1>W</h1>
+        </div>
+    </section>
+
+    <section>
+        <span>Ma<em>sk</em>ew</span>
+        <span>by <a href="http://oxism.com">Dan Motzenbecker</a></span>
+        <span>a javascript library for skewing the shapes of elements</span>
+        <span>&lt; 5k</span>
+        <span>mobile friendly</span>
+        <span>no dependencies <em>(but a modern browser)</em></span>
+        <span>optional jQuery plugin support</span>
+        <span><a href="https://github.com/dmotz/maskew">download on Github</a></span>
+    </section>
+
+    <section>
+        <div class="demo" id="demo1"></div>
+        <div class="demo" id="demo2"></div>
+        <div class="demo" id="demo3"></div>
+    </section>
+
+    <section>
+        <h3>Use it:</h3>
+        <pre>var maskew = new Maskew(document.getElementById('skew-me'), angle)</pre>
+        <h3>With jQuery:</h3>
+        <pre>var $maskew = $('#skew-me').maskew(angle)</pre>
+        <h3>Skew it:</h3>
+        <pre>maskew.skew(9)</pre>
+        <h3>Add some touch:</h3>
+        <pre>var touchMe = new Maskew(document.getElementById('skew-me'), angle, { interactive: true })</pre>
+    </section>
+
+
+    <script src="maskew.js"></script>
+    <script src="demo/demo.js"></script>
+    <script>
+        // var _gaq = _gaq || [];
+        // _gaq.push(['_setAccount', 'UA-33974399-1']);
+        // _gaq.push(['_trackPageview']);
+        // (function() {
+        // var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        // ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        // var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        // })();
+    </script>
+</body>
+</html>
