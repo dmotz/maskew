@@ -11,14 +11,29 @@ $yellow = #fff147
     background-color: $red
 
 
+::-moz-selection
+  background: #000
+  color: #fff
+  text-shadow: none
+
+
+::selection
+  background: #000
+  color: #fff
+  text-shadow: none
+
+
+
 html
-  font-size: 100%
+  font-size: 85%
   background-color: #222
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
 
 
 body
   padding: 3.125rem
+  max-width: 60rem
+  margin: 0 auto
 
 
 h1
@@ -31,7 +46,8 @@ h1
   text-align: center
   box-sizing: border-box
   margin: 0.2rem
-  line-height: 1.4
+  margin-bottom: 1.6rem
+  line-height: 1.3
   width: 12.5rem
   height: 12.5rem
   animation: morph-color 5s infinite
@@ -43,10 +59,6 @@ h1
     background-image: url('k2.jpg')
     background-size: 250px
     background-position: center
-
-
-.row
-  margin-bottom: 1.4rem
 
 
 section
@@ -62,7 +74,8 @@ h3
   height: 301px
   background-size: 245px 301px
   display: inline-block
-  margin: 1rem
+  margin-bottom: 2rem
+
 
 #demo1
   background-image: url('1.jpg')
@@ -72,6 +85,15 @@ h3
 
 #demo3
   background-image: url('3.jpg')
+
+#demo4
+  background-image: url('4.jpg')
+
+#demo5
+  background-image: url('5.jpg')
+
+#demo6
+  background-image: url('6.jpg')
 
 span
   background-color: #eee
@@ -105,4 +127,9 @@ pre
   margin: 0.8rem
   padding: 1rem
   overflow: auto
+
+
+footer
+  color: #ccc
+  text-align: center
 
