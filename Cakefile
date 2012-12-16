@@ -13,8 +13,16 @@ task 'build', 'Build and minify Maskew from coffee source', ->
       throw err if err
       console.log stdout, stderr
 
+  exec 'coffee -c test/main.coffee', (err, stdout, stderr) ->
+    throw err if err
+    console.log stdout, stderr
+
 
 task 'watch', 'Build Maskew continuously', ->
   coffee = spawn 'coffee', ['-wc', 'maskew.coffee']
+  tests = spawn 'coffee', ['-wc', 'test/main.coffee']
   coffee.stdout.on 'data', output
   coffee.stderr.on 'data', output
+  tests.stdout.on 'data', output
+  tests.stderr.on 'data', output
+
