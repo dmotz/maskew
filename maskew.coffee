@@ -167,6 +167,8 @@ class window.Maskew
 
   @VERSION: '0.1.0'
 
+  @isSupported: hasSupport
+
 
 $ = window.jQuery? or window.$?.data?
 if $
