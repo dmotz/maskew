@@ -28,12 +28,15 @@ html
   font-size: 85%
   background-color: #222
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
+  -webkit-font-smoothing: antialiased
+  font-smoothing: antialiased
 
 
 body
   padding: 3.125rem
   max-width: 60rem
   margin: 0 auto
+  color: #ccc
 
 
 h1
@@ -53,6 +56,7 @@ h1
   animation: morph-color 5s infinite
   animation-direction: alternate
 
+
   &.photo
     color: transparent
     background-color: transparent
@@ -63,6 +67,12 @@ h1
 
 section
   margin-bottom: 3rem
+
+  &:first-child
+    margin-bottom: 1rem
+
+  > a
+    font-size: 1.5rem
 
 
 h3
@@ -105,6 +115,9 @@ span
   margin: 0.625rem
   display: inline-block
 
+  a:hover
+    color: #222
+
 
 a, em
   color: #888
@@ -117,19 +130,19 @@ a
   transition: color .33s
 
   &:hover
-    color: #222
+    color: #fff
 
 
 pre
   background-color: #444
   color: #ddd
-  font-size: 1.1rem
+  font-size: 1.2rem
   margin: 0.8rem
   padding: 1rem
   overflow: auto
 
 
 footer
-  color: #ccc
   text-align: center
+  font-size: 1.2rem
 

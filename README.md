@@ -10,7 +10,7 @@
 +  < 5k
 +  mobile friendly
 +  no dependencies
-+  optional jQuery support
++  optional jQuery plugin
 
 ###[Demos](http://dmotz.github.com/maskew)
 
