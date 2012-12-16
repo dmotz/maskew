@@ -113,6 +113,13 @@ class window.Maskew
     @holder.style[css.transform] = transform 0, -angle
 
     @el.style[css.transform] = transform yOffset, 0 if @options.anchor is 'bottom'
+  destroy: =>
+    parent = @_outerMask.parentNode
+    parent.insertBefore @_el, @_outerMask
+    parent.removeChild @_outerMask
+    $.data @_el, 'maskew', null if $
+    @[k] = null for k of @
+    null
 
 
   _onTouchStart: (e) =>
