@@ -98,6 +98,7 @@ class window.Maskew
     tlX = @_height * sine
     tlY = @_height * cosine
     adj = @_width - tlX
+    adj = 0 if adj < 0
     hyp = adj / cosine
     opp = sine * hyp
     yOffset = round @_height - tlY + opp
