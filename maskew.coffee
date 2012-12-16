@@ -19,13 +19,12 @@ testProp = (prop) ->
 
   capProp = prop.charAt(0).toUpperCase() + prop.slice 1
   for prefix in prefixList
-    if testEl.style[prefix + capProp]?
-      return prefix + capProp
+    return key if testEl.style[(key = prefix + capProp)]?
   false
 
 hasSupport = true
 testEl = document.createElement 'div'
-prefixList = ['Webkit', 'Moz', 'O', 'ms', 'Khtml']
+prefixList = ['webkit', 'moz', 'o', 'ms', 'khtml']
 css =
   transform: 'transform'
   origin: 'transformOrigin'
@@ -40,57 +39,53 @@ for key, value of css
 
 class window.Maskew
 
-  constructor: (@el, @angle, @options = {}) ->
-    return @el unless hasSupport
-    return new Maskew @el, @angle unless @ instanceof Maskew
+  constructor: (@_el, @angle, @_options = {}) ->
+    return @_el unless hasSupport
+    return new Maskew @_el, @angle unless @ instanceof Maskew
 
-    @options.interactive or= false
-    @options.anchor or= 'top'
-    @options.showElement or= false
+    @_options.touch or= false
+    @_options.anchor or= 'top'
+    @_options.showElement or= false
 
-    contents = @el.cloneNode true
-    elStyle = window.getComputedStyle @el
+    contents = @_el.cloneNode true
+    elStyle = window.getComputedStyle @_el
     xMetrics = ['width', 'paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
     yMetrics = ['height', 'paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
-    @width = 0
-    @width += getMetric elStyle, key for key in xMetrics
-    @height = 0
-    @height += getMetric elStyle, key for key in yMetrics
+    @_width = 0
+    @_width += getMetric elStyle, key for key in xMetrics
+    @_height = 0
+    @_height += getMetric elStyle, key for key in yMetrics
 
-    @outerMask = document.createElement 'div'
-    @outerMask.style.padding = '0'
-    @outerMask.style.width = @width + 'px'
-    @outerMask.style.height = @height + 'px'
-    @outerMask.style.overflow = 'hidden'
+    @_outerMask = document.createElement 'div'
+    @_outerMask.style.padding = '0'
+    @_outerMask.style.width = @_width + 'px'
+    @_outerMask.style.height = @_height + 'px'
+    @_outerMask.style.overflow = 'hidden'
 
-    if @options.showElement
-      @el.style.display = 'block'
-      @outerMask.style.display = @options.showElement
+    if @_options.showElement
+      @_el.style.display = 'block'
+      @_outerMask.style.display = @_options.showElement
     else
-      @outerMask.style.display = elStyle.display
+      @_outerMask.style.display = elStyle.display
 
-    @innerMask = @outerMask.cloneNode false
-    @innerMask.style[css.origin] = 'bottom left'
+    @_innerMask = @_outerMask.cloneNode false
+    @_innerMask.style[css.origin] = 'bottom left'
 
-    @holder = @outerMask.cloneNode false
-    @holder.style[css.origin] = 'inherit'
+    @_holder = @_outerMask.cloneNode false
+    @_holder.style[css.origin] = 'inherit'
 
     for side in ['Top', 'Right', 'Bottom', 'Left'] then do (key = 'margin' + side) =>
-      @outerMask.style[key] = elStyle[key]
+      @_outerMask.style[key] = elStyle[key]
 
-    @el.style.margin = '0'
+    @_el.style.margin = '0'
 
-    @el.parentNode.insertBefore @outerMask, @el
-    @holder.appendChild @el
-    @innerMask.appendChild @holder
-    @outerMask.appendChild @innerMask
+    @_el.parentNode.insertBefore @_outerMask, @_el
+    @_holder.appendChild @_el
+    @_innerMask.appendChild @_holder
+    @_outerMask.appendChild @_innerMask
 
-    if @options.interactive
-      @outerMask.style.cursor = 'ew-resize'
-      eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp']]
-      for eventPair in eventPairs
-        for eString in eventPair then do (fn = '_on' + eventPair[0]) =>
-          @outerMask.addEventListener eString.toLowerCase(), @[fn], false
+    if @_options.touch
+      @setTouch true
 
     @skew @angle
 
@@ -100,19 +95,40 @@ class window.Maskew
     angle = 0 if angle < 0
     sine = sin rad angle
     cosine = cos rad angle
-    tlX = @height * sine
-    tlY = @height * cosine
-    adj = @width - tlX
+    tlX = @_height * sine
+    tlY = @_height * cosine
+    adj = @_width - tlX
     hyp = adj / cosine
     opp = sine * hyp
-    yOffset = round @height - tlY + opp
+    yOffset = round @_height - tlY + opp
 
-    @outerMask.style.height = round(tlY - opp) + 'px'
-    @innerMask.style.width = round(hyp) + 'px'
-    @innerMask.style[css.transform] = transform -yOffset, angle
-    @holder.style[css.transform] = transform 0, -angle
+    @_outerMask.style.height = round(tlY - opp) + 'px'
+    @_innerMask.style.width = round(hyp) + 'px'
+    @_innerMask.style[css.transform] = transform -yOffset, angle
+    @_holder.style[css.transform] = transform 0, -angle
 
-    @el.style[css.transform] = transform yOffset, 0 if @options.anchor is 'bottom'
+    @_el.style[css.transform] = transform yOffset, 0 if @_options.anchor is 'bottom'
+    @
+
+
+  setTouch: (toggle) ->
+    if toggle
+      return if @_touchEnabled
+      listenFn = 'addEventListener'
+      @_outerMask.style.cursor = 'ew-resize'
+      @_touchEnabled = true
+    else
+      return unless @_touchEnabled
+      listenFn = 'removeEventListener'
+      @_outerMask.style.cursor = 'default'
+      @_touchEnabled = false
+
+    eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp']]
+    for eventPair in eventPairs
+      for eString in eventPair then do (fn = '_on' + eventPair[0]) =>
+        @_outerMask[listenFn] eString.toLowerCase(), @[fn], false
+
+
   destroy: =>
     parent = @_outerMask.parentNode
     parent.insertBefore @_el, @_outerMask
@@ -140,7 +156,7 @@ class window.Maskew
     else if e.type is 'touchmove'
       @_xDelta = e.touches[0].pageX - @_x1
 
-    @_dragAngle = @angle + @_xDelta / abs 3 + @_xDelta / @width
+    @_dragAngle = @angle + @_xDelta / abs 3 + @_xDelta / @_width
     @skew()
 
 
@@ -151,7 +167,8 @@ class window.Maskew
   @VERSION: '0.1.0'
 
 
-if window.jQuery? or window.$?.data?
+$ = window.jQuery? or window.$?.data?
+if $
 
   $::maskew = (angle, options) ->
 
