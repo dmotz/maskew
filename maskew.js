@@ -61,6 +61,8 @@
       this._el = _el;
       this.angle = angle;
       this._options = _options != null ? _options : {};
+      this._onTouchLeave = __bind(this._onTouchLeave, this);
+
       this._onTouchEnd = __bind(this._onTouchEnd, this);
 
       this._onTouchMove = __bind(this._onTouchMove, this);
@@ -141,6 +143,9 @@
       tlX = this._height * sine;
       tlY = this._height * cosine;
       adj = this._width - tlX;
+      if (adj < 0) {
+        adj = 0;
+      }
       hyp = adj / cosine;
       opp = sine * hyp;
       yOffset = round(this._height - tlY + opp);
@@ -171,7 +176,7 @@
         this._outerMask.style.cursor = 'default';
         this._touchEnabled = false;
       }
-      eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp']];
+      eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseOut']];
       _results = [];
       for (_i = 0, _len = eventPairs.length; _i < _len; _i++) {
         eventPair = eventPairs[_i];
@@ -207,6 +212,7 @@
 
     Maskew.prototype._onTouchStart = function(e) {
       e.preventDefault();
+      this._touchStarted = true;
       if (e.type === 'mousedown') {
         this._x1 = e.pageX;
       } else if (e.type === 'touchstart') {
@@ -216,11 +222,11 @@
     };
 
     Maskew.prototype._onTouchMove = function(e) {
+      if (!this._touchStarted) {
+        return;
+      }
       e.preventDefault();
       if (e.type === 'mousemove') {
-        if (e.which !== 1) {
-          return;
-        }
         this._xDelta = e.pageX - this._x1;
       } else if (e.type === 'touchmove') {
         this._xDelta = e.touches[0].pageX - this._x1;
@@ -229,11 +235,18 @@
       return this.skew();
     };
 
-    Maskew.prototype._onTouchEnd = function(e) {
+    Maskew.prototype._onTouchEnd = function() {
+      this._touchStarted = false;
       return this.angle = this._dragAngle || this.angle;
     };
 
+    Maskew.prototype._onTouchLeave = function() {
+      return this._onTouchEnd();
+    };
+
     Maskew.VERSION = '0.1.0';
+
+    Maskew.isSupported = hasSupport;
 
     return Maskew;
 

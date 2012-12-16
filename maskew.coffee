@@ -124,7 +124,8 @@ class window.Maskew
       @_outerMask.style.cursor = 'default'
       @_touchEnabled = false
 
-    eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp']]
+    eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'],
+                  ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseOut']]
     for eventPair in eventPairs
       for eString in eventPair then do (fn = '_on' + eventPair[0]) =>
         @_outerMask[listenFn] eString.toLowerCase(), @[fn], false
@@ -141,6 +142,7 @@ class window.Maskew
 
   _onTouchStart: (e) =>
     e.preventDefault()
+    @_touchStarted = true
     if e.type is 'mousedown'
       @_x1 = e.pageX
     else if e.type is 'touchstart'
@@ -150,9 +152,9 @@ class window.Maskew
 
 
   _onTouchMove: (e) =>
+    return unless @_touchStarted
     e.preventDefault()
     if e.type is 'mousemove'
-      return if e.which isnt 1
       @_xDelta = e.pageX - @_x1
     else if e.type is 'touchmove'
       @_xDelta = e.touches[0].pageX - @_x1
@@ -161,8 +163,12 @@ class window.Maskew
     @skew()
 
 
-  _onTouchEnd: (e) =>
+  _onTouchEnd: =>
+    @_touchStarted = false
     @angle = @_dragAngle or @angle
+
+
+  _onTouchLeave: => @_onTouchEnd()
 
 
   @VERSION: '0.1.0'
