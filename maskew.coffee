@@ -78,15 +78,12 @@ class window.Maskew
       @_outerMask.style[key] = elStyle[key]
 
     @_el.style.margin = '0'
-
     @_el.parentNode.insertBefore @_outerMask, @_el
     @_holder.appendChild @_el
     @_innerMask.appendChild @_holder
     @_outerMask.appendChild @_innerMask
 
-    if @_options.touch
-      @setTouch true
-
+    @setTouch true if @_options.touch
     @skew @angle
 
 
@@ -176,21 +173,21 @@ class window.Maskew
   @isSupported: hasSupport
 
 
-$ = window.jQuery? or window.$?.data?
-if $
+if window.jQuery? or window.$?.data?
 
-  $::maskew = (angle, options) ->
+  $.fn.maskew = (angle, options) ->
 
     return @ unless hasSupport
 
     if typeof angle is 'object'
       options = angle
       angle = 0
-    else if angle is 'skew' and typeof options is 'number'
+    else if typeof angle is 'string'
 
       for el in @
-        instance = $.data el, 'maskew'
-        instance.skew.call instance, options
+        return @ unless (instance = $.data el, 'maskew')
+        return @ unless typeof instance[angle] is 'function'
+        instance[angle].call instance, options
 
       return @
 
