@@ -37,6 +37,8 @@
 
   testDiv = document.createElement('div');
 
+  testDiv.className = 'maskew-test';
+
   transformKey = (function() {
     var key, prefix, _i, _len, _ref;
     if (testDiv.style.transform != null) {
@@ -128,7 +130,7 @@
         return expect(getRotation(testMaskew._innerMask)).to.equal(0);
       });
     });
-    return describe('#destroy()', function() {
+    describe('#destroy()', function() {
       var el;
       el = testMaskew._outerMask;
       it('should remove the Maskew element from the document', function() {
@@ -148,6 +150,25 @@
           return true;
         })();
         return expect(allNull).to.equal(true);
+      });
+    });
+    return describe('#$.fn.maskew()', function() {
+      var $testMaskew;
+      $testMaskew = $('.maskew-test').maskew();
+      it('should return a jQuery object', function() {
+        return expect($testMaskew instanceof jQuery).to.equal(true);
+      });
+      it('should stash a reference to the Maskew instance in the data cache', function() {
+        return expect($testMaskew.maskew()).to.equal($testMaskew.maskew());
+      });
+      it('should return its Maskew instance by calling it with no arguments', function() {
+        return expect($testMaskew.maskew() instanceof Maskew).to.equal(true);
+      });
+      return it('should proxy Maskew methods as string arguments', function() {
+        $testMaskew.maskew('skew', 5);
+        expect(parseInt($testMaskew.maskew()._outerMask.style.height, 10)).to.equal(220);
+        $testMaskew.maskew('setTouch', true);
+        return expect($testMaskew.maskew()._outerMask.style.cursor).to.equal('ew-resize');
       });
     });
   });

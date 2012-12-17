@@ -22,6 +22,7 @@ testPresence = (el) ->
 
 
 testDiv = document.createElement 'div'
+testDiv.className = 'maskew-test'
 transformKey = do ->
   return 'transform' if testDiv.style.transform?
   for prefix in ['webkit', 'moz', 'o', 'ms', 'khtml']
@@ -107,4 +108,24 @@ describe 'Maskew', ->
           return false if v isnt null
         true
       expect(allNull).to.equal true
+
+
+  describe '#$.fn.maskew()', ->
+    $testMaskew = $('.maskew-test').maskew()
+
+    it 'should return a jQuery object', ->
+      expect($testMaskew instanceof jQuery).to.equal true
+
+    it 'should stash a reference to the Maskew instance in the data cache', ->
+      expect($testMaskew.maskew()).to.equal $testMaskew.maskew()
+
+    it 'should return its Maskew instance by calling it with no arguments', ->
+      expect($testMaskew.maskew() instanceof Maskew).to.equal true
+
+    it 'should proxy Maskew methods as string arguments', ->
+      $testMaskew.maskew 'skew', 5
+      expect(parseInt $testMaskew.maskew()._outerMask.style.height, 10).to.equal 220
+      $testMaskew.maskew 'setTouch', true
+      expect($testMaskew.maskew()._outerMask.style.cursor).to.equal 'ew-resize'
+
 
