@@ -131,15 +131,15 @@
     }
 
     Maskew.prototype.skew = function(angle) {
-      var adj, cosine, hyp, opp, sine, tlX, tlY, yOffset;
+      var adj, cosine, hyp, opp, rads, sine, tlX, tlY, yOffset;
       if (angle == null) {
         angle = this._dragAngle || 0;
       }
       if (angle < 0) {
         angle = 0;
       }
-      sine = sin(rad(angle));
-      cosine = cos(rad(angle));
+      sine = sin((rads = rad(angle)));
+      cosine = cos(rads);
       tlX = this._height * sine;
       tlY = this._height * cosine;
       adj = this._width - tlX;

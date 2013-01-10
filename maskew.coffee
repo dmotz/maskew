@@ -90,8 +90,8 @@ class window.Maskew
   skew: (angle) =>
     angle ?= @_dragAngle or 0
     angle = 0 if angle < 0
-    sine = sin rad angle
-    cosine = cos rad angle
+    sine = sin (rads = rad angle)
+    cosine = cos rads
     tlX = @_height * sine
     tlY = @_height * cosine
     adj = @_width - tlX
