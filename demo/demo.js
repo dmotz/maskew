@@ -10,5 +10,7 @@
             new Maskew(demos[i], 12, { touch: true });
         }
 
+        new Maskew(document.getElementById('count-demo'), 12, { touch: true });
+
     }, false);
 }();

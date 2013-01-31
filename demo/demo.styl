@@ -11,6 +11,11 @@ $yellow = #fff147
     background-color: $red
 
 
+@keyframes going-up
+  to
+    transform: translate3d(0, -75%, 0)
+
+
 ::-moz-selection
   background: #000
   color: #fff
@@ -145,4 +150,42 @@ pre
 footer
   text-align: center
   font-size: 1.2rem
+
+
+#count-demo
+  width: 25rem
+  height: 25rem
+  margin: 1rem auto
+  overflow: hidden
+
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    width: 100%
+    animation: going-up 20s infinite linear
+    animation-direction: alternate
+
+    li
+      width: 25rem
+      height: 25rem
+      padding: 0
+      margin: 0
+      font-size: 19rem
+      line-height: 1.35
+      font-weight: bolder
+      text-align: center
+      color: rgba(0, 0, 0, .3)
+
+      &:nth-child(1)
+        background-color: $red
+
+      &:nth-child(2)
+        background-color: #4aaaed
+
+      &:nth-child(3)
+        background-color: #8bf64d
+
+      &:nth-child(4)
+        background-color: #4aeda5
 
