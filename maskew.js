@@ -86,12 +86,11 @@
       elStyle = window.getComputedStyle(this._el);
       xMetrics = ['width', 'paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth'];
       yMetrics = ['height', 'paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth'];
-      this._width = 0;
+      this._width = this._height = 0;
       for (_i = 0, _len = xMetrics.length; _i < _len; _i++) {
         key = xMetrics[_i];
         this._width += getMetric(elStyle, key);
       }
-      this._height = 0;
       for (_j = 0, _len1 = yMetrics.length; _j < _len1; _j++) {
         key = yMetrics[_j];
         this._height += getMetric(elStyle, key);

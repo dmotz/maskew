@@ -51,9 +51,8 @@ class window.Maskew
     elStyle = window.getComputedStyle @_el
     xMetrics = ['width', 'paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
     yMetrics = ['height', 'paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
-    @_width = 0
+    @_width = @_height = 0
     @_width += getMetric elStyle, key for key in xMetrics
-    @_height = 0
     @_height += getMetric elStyle, key for key in yMetrics
 
     @_outerMask = document.createElement 'div'
