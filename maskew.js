@@ -36,7 +36,7 @@
 
   testEl = document.createElement('div');
 
-  prefixList = ['webkit', 'moz', 'o', 'ms', 'khtml'];
+  prefixList = ['webkit', 'moz', 'o', 'ms'];
 
   css = {
     transform: 'transform',
