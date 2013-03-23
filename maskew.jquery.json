@@ -1,5 +1,5 @@
 {
-    "name": "Maskew",
+    "name": "maskew",
     "title": "Maskew",
     "description": "Skew the shapes of elements without distorting their contents",
     "keywords": [
@@ -8,7 +8,7 @@
         "UI",
         "touch"
     ],
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": {
         "name": "Dan Motzenbecker",
         "url": "http://oxism.com"
