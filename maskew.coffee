@@ -2,7 +2,7 @@
 # Skew the shapes of DOM elements
 # Dan Motzenbecker
 # http://oxism.com
-# 0.1.0
+# 0.1.1
 # MIT License
 
 
