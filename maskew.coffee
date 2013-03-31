@@ -2,7 +2,7 @@
 # Skew the shapes of DOM elements
 # Dan Motzenbecker
 # http://oxism.com
-# 0.1.1
+# 0.1.2
 # MIT License
 
 
@@ -169,7 +169,7 @@ class window.Maskew
   _onTouchLeave: => @_onTouchEnd()
 
 
-  @VERSION: '0.1.0'
+  @VERSION: '0.1.2'
 
   @isSupported: hasSupport
 
