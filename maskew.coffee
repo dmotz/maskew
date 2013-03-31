@@ -126,6 +126,7 @@ class window.Maskew
     for eventPair in eventPairs
       for eString in eventPair then do (fn = '_on' + eventPair[0]) =>
         @_outerMask[listenFn] eString.toLowerCase(), @[fn], false
+    @
 
 
   destroy: =>
