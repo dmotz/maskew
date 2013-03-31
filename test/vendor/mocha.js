@@ -62,14 +62,14 @@ require.register("browser/diff.js", function(module, exports, require){
 
 /*
  * Text diff implementation.
- * 
+ *
  * This library supports the following APIS:
  * JsDiff.diffChars: Character by character diff
  * JsDiff.diffWords: Word (as defined by \b regex) diff which ignores whitespace
  * JsDiff.diffLines: Line based diff
- * 
+ *
  * JsDiff.diffCss: Diff targeted at CSS content
- * 
+ *
  * These methods are based on the implementation proposed in
  * "An O(ND) Difference Algorithm and its Variations" (Myers, 1986).
  * http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.4.6927
@@ -819,7 +819,7 @@ var Suite = require('../suite')
 
 /**
  * BDD-style interface:
- * 
+ *
  *      describe('Array', function(){
  *        describe('#indexOf()', function(){
  *          it('should return -1 when not present', function(){
@@ -831,7 +831,7 @@ var Suite = require('../suite')
  *          });
  *        });
  *      });
- * 
+ *
  */
 
 module.exports = function(suite){
@@ -956,19 +956,19 @@ var Suite = require('../suite')
 
 /**
  * TDD-style interface:
- * 
+ *
  *     exports.Array = {
  *       '#indexOf()': {
  *         'should return -1 when the value is not present': function(){
- *           
+ *
  *         },
  *
  *         'should return the correct index when the value is present': function(){
- *           
+ *
  *         }
  *       }
  *     };
- * 
+ *
  */
 
 module.exports = function(suite){
@@ -1028,27 +1028,27 @@ var Suite = require('../suite')
 
 /**
  * QUnit-style interface:
- * 
+ *
  *     suite('Array');
- *     
+ *
  *     test('#length', function(){
  *       var arr = [1,2,3];
  *       ok(arr.length == 3);
  *     });
- *     
+ *
  *     test('#indexOf()', function(){
  *       var arr = [1,2,3];
  *       ok(arr.indexOf(1) == 0);
  *       ok(arr.indexOf(2) == 1);
  *       ok(arr.indexOf(3) == 2);
  *     });
- *     
+ *
  *     suite('String');
- *     
+ *
  *     test('#length', function(){
  *       ok('foo'.length == 3);
  *     });
- * 
+ *
  */
 
 module.exports = function(suite){
@@ -1129,7 +1129,7 @@ var Suite = require('../suite')
  *          suiteSetup(function(){
  *
  *          });
- *          
+ *
  *          test('should return -1 when not present', function(){
  *
  *          });
@@ -3763,7 +3763,7 @@ function XUnit(runner) {
     }, false));
 
     tests.forEach(test);
-    console.log('</testsuite>');    
+    console.log('</testsuite>');
   });
 }
 
@@ -4066,7 +4066,8 @@ var EventEmitter = require('browser/events').EventEmitter
   , utils = require('./utils')
   , filter = utils.filter
   , keys = utils.keys
-  , noop = function(){};
+  , noop = function(){}
+  , immediately = global.setImmediate || process.nextTick;
 
 /**
  * Non-enumerable globals.
@@ -4303,7 +4304,7 @@ Runner.prototype.hook = function(name, fn){
     });
   }
 
-  process.nextTick(function(){
+  immediately(function(){
     next(0);
   });
 };
@@ -4546,14 +4547,16 @@ Runner.prototype.run = function(fn){
   var self = this
     , fn = fn || function(){};
 
+  function uncaught(err){
+    self.uncaught(err);
+  }
+
   debug('start');
 
   // callback
   this.on('end', function(){
     debug('end');
-    process.removeListener('uncaughtException', function(err){
-      self.uncaught(err);
-    });
+    process.removeListener('uncaughtException', uncaught);
     fn(self.failures);
   });
 
@@ -4565,9 +4568,7 @@ Runner.prototype.run = function(fn){
   });
 
   // uncaught exception
-  process.on('uncaughtException', function(err){
-    self.uncaught(err);
-  });
+  process.on('uncaughtException', uncaught);
 
   return this;
 };
@@ -5005,7 +5006,7 @@ exports.indexOf = function(arr, obj, start){
 
 /**
  * Array#reduce (<=IE8)
- * 
+ *
  * @param {Array} array
  * @param {Function} fn
  * @param {Object} initial value
