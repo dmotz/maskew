@@ -56,7 +56,7 @@
 
   window.Maskew = (function() {
     function Maskew(_el, angle, _options) {
-      var contents, elStyle, side, xMetrics, yMetrics, _base, _base1, _base2, _fn, _i, _j, _k, _len, _len1, _len2, _ref,
+      var contents, elStyle, side, xMetrics, yMetrics, _base, _base1, _base2, _base3, _fn, _i, _j, _k, _len, _len1, _len2, _ref,
         _this = this;
 
       this._el = _el;
@@ -77,6 +77,7 @@
       (_base = this._options).touch || (_base.touch = false);
       (_base1 = this._options).anchor || (_base1.anchor = 'top');
       (_base2 = this._options).showElement || (_base2.showElement = false);
+      (_base3 = this._options).className || (_base3.className = 'maskew');
       contents = this._el.cloneNode(true);
       elStyle = window.getComputedStyle(this._el);
       xMetrics = ['width', 'paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth'];
@@ -118,6 +119,7 @@
       this._holder.appendChild(this._el);
       this._innerMask.appendChild(this._holder);
       this._outerMask.appendChild(this._innerMask);
+      this._outerMask.className = this._options.className;
       if (this._options.touch) {
         this.setTouch(true);
       }
@@ -155,7 +157,8 @@
     };
 
     Maskew.prototype.setTouch = function(toggle) {
-      var eString, eventPair, eventPairs, listenFn, _i, _len, _results;
+      var eString, eventPair, eventPairs, listenFn, _fn, _i, _j, _len, _len1,
+        _this = this;
 
       if (toggle) {
         if (this._touchEnabled) {
@@ -173,24 +176,17 @@
         this._touchEnabled = false;
       }
       eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseOut']];
-      _results = [];
       for (_i = 0, _len = eventPairs.length; _i < _len; _i++) {
         eventPair = eventPairs[_i];
-        _results.push((function() {
-          var _j, _len1, _results1,
-            _this = this;
-
-          _results1 = [];
-          for (_j = 0, _len1 = eventPair.length; _j < _len1; _j++) {
-            eString = eventPair[_j];
-            _results1.push((function(fn) {
-              return _this._outerMask[listenFn](eString.toLowerCase(), _this[fn], false);
-            })('_on' + eventPair[0]));
-          }
-          return _results1;
-        }).call(this));
+        _fn = function(fn) {
+          return _this._outerMask[listenFn](eString.toLowerCase(), _this[fn], false);
+        };
+        for (_j = 0, _len1 = eventPair.length; _j < _len1; _j++) {
+          eString = eventPair[_j];
+          _fn('_on' + eventPair[0]);
+        }
       }
-      return _results;
+      return this;
     };
 
     Maskew.prototype.destroy = function() {
@@ -242,7 +238,7 @@
       return this._onTouchEnd();
     };
 
-    Maskew.VERSION = '0.1.0';
+    Maskew.VERSION = '0.1.2';
 
     Maskew.isSupported = hasSupport;
 
