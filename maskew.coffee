@@ -16,7 +16,6 @@ transform = (y, angle) -> "translate3d(0, #{ y }px, 0) rotate3d(0, 0, 1, #{ angl
 
 testProp = (prop) ->
   return prop if testEl.style[prop]?
-
   capProp = prop.charAt(0).toUpperCase() + prop.slice 1
   for prefix in prefixList
     return key if testEl.style[(key = prefix + capProp)]?
@@ -46,6 +45,7 @@ class window.Maskew
     @_options.touch or= false
     @_options.anchor or= 'top'
     @_options.showElement or= false
+    @_options.className or= 'maskew'
 
     contents = @_el.cloneNode true
     elStyle = window.getComputedStyle @_el
@@ -81,6 +81,7 @@ class window.Maskew
     @_holder.appendChild @_el
     @_innerMask.appendChild @_holder
     @_outerMask.appendChild @_innerMask
+    @_outerMask.className = @_options.className
 
     @setTouch true if @_options.touch
     @skew @angle
