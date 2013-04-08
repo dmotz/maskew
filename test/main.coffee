@@ -33,7 +33,10 @@ testDiv.style.height = '200px'
 testDiv.style.margin = '20px'
 testDiv.style.padding = '20px'
 testDiv.style.backgroundColor = '#fff'
+testDiv2 = testDiv.cloneNode false
+testDiv2.className = 'maskew-test2'
 document.body.appendChild testDiv
+document.body.appendChild testDiv2
 originalParent = testDiv.parentNode
 cleanStyle = styleFetcher testDiv
 
@@ -111,7 +114,7 @@ describe 'Maskew', ->
 
 
   describe '#$.fn.maskew()', ->
-    $testMaskew = $('.maskew-test').maskew()
+    $testMaskew = $('.maskew-test2').maskew()
 
     it 'should return a jQuery object', ->
       expect($testMaskew instanceof jQuery).to.equal true
