@@ -176,7 +176,7 @@ class window.Maskew
 
 if window.jQuery? or window.$?.data?
 
-  $.fn.maskew = (angle, options) ->
+  $::maskew = (angle, options) ->
 
     return @ unless hasSupport
 
