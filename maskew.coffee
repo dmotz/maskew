@@ -25,8 +25,8 @@ hasSupport = true
 testEl = document.createElement 'div'
 prefixList = ['webkit', 'moz', 'o', 'ms']
 css =
-  transform: 'transform'
-  origin: 'transformOrigin'
+  transform:      'transform'
+  origin:         'transformOrigin'
   transformStyle: 'transformStyle'
 
 for key, value of css
@@ -42,23 +42,23 @@ class window.Maskew
     return @_el unless hasSupport
     return new Maskew @_el, @angle unless @ instanceof Maskew
 
-    @_options.touch or= false
-    @_options.anchor or= 'top'
+    @_options.touch       or= false
+    @_options.anchor      or= 'top'
     @_options.showElement or= false
-    @_options.className or= 'maskew'
+    @_options.className   or= 'maskew'
 
     contents = @_el.cloneNode true
-    elStyle = window.getComputedStyle @_el
+    elStyle  = window.getComputedStyle @_el
     xMetrics = ['width', 'paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth']
     yMetrics = ['height', 'paddingTop', 'paddingBottom', 'borderTopWidth', 'borderBottomWidth']
-    @_width = @_height = 0
-    @_width += getMetric elStyle, key for key in xMetrics
+    @_width  = @_height = 0
+    @_width  += getMetric elStyle, key for key in xMetrics
     @_height += getMetric elStyle, key for key in yMetrics
 
     @_outerMask = document.createElement 'div'
-    @_outerMask.style.padding = '0'
-    @_outerMask.style.width = @_width + 'px'
-    @_outerMask.style.height = @_height + 'px'
+    @_outerMask.style.padding  = '0'
+    @_outerMask.style.width    = @_width  + 'px'
+    @_outerMask.style.height   = @_height + 'px'
     @_outerMask.style.overflow = 'hidden'
 
     if @_options.showElement
@@ -88,22 +88,22 @@ class window.Maskew
 
 
   skew: (angle) =>
-    angle ?= @_dragAngle or 0
-    angle = 0 if angle < 0
-    sine = sin (rads = rad angle)
-    cosine = cos rads
-    tlX = @_height * sine
-    tlY = @_height * cosine
-    adj = @_width - tlX
-    adj = 0 if adj < 0
-    hyp = adj / cosine
-    opp = sine * hyp
+    angle  ?= @_dragAngle or 0
+    angle   = 0 if angle < 0
+    sine    = sin (rads = rad angle)
+    cosine  = cos rads
+    tlX     = @_height * sine
+    tlY     = @_height * cosine
+    adj     = @_width - tlX
+    adj     = 0 if adj < 0
+    hyp     = adj / cosine
+    opp     = sine * hyp
     yOffset = round @_height - tlY + opp
 
     @_outerMask.style.height = round(tlY - opp) + 'px'
-    @_innerMask.style.width = round(hyp) + 'px'
+    @_innerMask.style.width  = round(hyp) + 'px'
     @_innerMask.style[css.transform] = transform -yOffset, angle
-    @_holder.style[css.transform] = transform 0, -angle
+    @_holder.style[css.transform]    = transform 0, -angle
 
     @_el.style[css.transform] = transform yOffset, 0 if @_options.anchor is 'bottom'
     @
