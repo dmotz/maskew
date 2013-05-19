@@ -69,7 +69,7 @@
       this.destroy = __bind(this.destroy, this);
       this.skew = __bind(this.skew, this);
       if (!hasSupport) {
-        return this._el;
+        return this;
       }
       if (!(this instanceof Maskew)) {
         return new Maskew(this._el, this.angle);
@@ -238,7 +238,7 @@
       return this._onTouchEnd();
     };
 
-    Maskew.VERSION = '0.1.2';
+    Maskew.VERSION = '0.1.3';
 
     Maskew.isSupported = hasSupport;
 
@@ -247,7 +247,7 @@
   })();
 
   if ((window.jQuery != null) || (((_ref = window.$) != null ? _ref.data : void 0) != null)) {
-    $.fn.maskew = function(angle, options) {
+    $.prototype.maskew = function(angle, options) {
       var el, instance, _i, _j, _len, _len1;
 
       if (!hasSupport) {
