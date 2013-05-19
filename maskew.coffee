@@ -39,7 +39,7 @@ for key, value of css
 class window.Maskew
 
   constructor: (@_el, @angle, @_options = {}) ->
-    return @_el unless hasSupport
+    return @ unless hasSupport
     return new Maskew @_el, @angle unless @ instanceof Maskew
 
     @_options.touch       or= false
