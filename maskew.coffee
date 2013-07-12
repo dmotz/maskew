@@ -91,7 +91,7 @@ class window.Maskew
   skew: (angle) =>
     angle  ?= @_dragAngle or 0
     angle   = 0 if angle < 0
-    sine    = sin (rads = rad angle)
+    sine    = sin rads = rad angle
     cosine  = cos rads
     tlX     = @_height * sine
     tlY     = @_height * cosine
@@ -183,18 +183,18 @@ if window.jQuery? or window.$?.data?
 
     if typeof angle is 'object'
       options = angle
-      angle = 0
+      angle   = 0
     else if typeof angle is 'string'
 
       for el in @
-        return @ unless (instance = $.data el, 'maskew')
+        return @ unless instance = $.data el, 'maskew'
         return @ unless typeof instance[angle] is 'function'
         instance[angle].call instance, options
 
       return @
 
     for el in @
-      return instance if (instance = $.data el, 'maskew')
+      return instance if instance = $.data el, 'maskew'
       $.data el, 'maskew', new Maskew el, angle, options
 
     @
