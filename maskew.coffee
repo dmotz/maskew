@@ -22,8 +22,9 @@ testProp = (prop) ->
   false
 
 hasSupport = true
-testEl = document.createElement 'div'
-prefixList = ['webkit', 'moz', 'o', 'ms']
+testEl     = document.createElement 'div'
+prefixList = ['webkit', 'Moz', 'o', 'ms']
+
 css =
   transform:      'transform'
   origin:         'transformOrigin'
