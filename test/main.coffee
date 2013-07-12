@@ -25,20 +25,20 @@ testDiv = document.createElement 'div'
 testDiv.className = 'maskew-test'
 transformKey = do ->
   return 'transform' if testDiv.style.transform?
-  for prefix in ['webkit', 'moz', 'o', 'ms', 'khtml']
+  for prefix in ['webkit', 'Moz', 'o', 'ms']
     return key if testDiv.style[(key = prefix + 'Transform')]?
 
-testDiv.style.width = '200px'
-testDiv.style.height = '200px'
-testDiv.style.margin = '20px'
-testDiv.style.padding = '20px'
+testDiv.style.width           = '200px'
+testDiv.style.height          = '200px'
+testDiv.style.margin          = '20px'
+testDiv.style.padding         = '20px'
 testDiv.style.backgroundColor = '#fff'
 testDiv2 = testDiv.cloneNode false
 testDiv2.className = 'maskew-test2'
 document.body.appendChild testDiv
 document.body.appendChild testDiv2
 originalParent = testDiv.parentNode
-cleanStyle = styleFetcher testDiv
+cleanStyle     = styleFetcher testDiv
 
 testMaskew = new Maskew testDiv
 dirtyStyle = styleFetcher testMaskew._outerMask
@@ -58,12 +58,12 @@ describe 'Maskew', ->
       expect(testMaskew._outerMask.parentNode).to.equal originalParent
 
     it 'should create an element of the same dimensions', ->
-      expect(dirtyStyle 'width').to.equal testDiv.clientWidth + 'px'
+      expect(dirtyStyle 'width').to.equal  testDiv.clientWidth  + 'px'
       expect(dirtyStyle 'height').to.equal testDiv.clientHeight + 'px'
 
     it 'should create an element with the same margins and padding', ->
       for side in ['Top', 'Right', 'Bottom', 'Left']
-        margin = 'margin' + side
+        margin  = 'margin' + side
         padding = 'padding' + side
         expect(dirtyStyle margin).to.equal cleanStyle margin
         expect(testMaskew._el.style[padding]).to.equal cleanStyle padding
