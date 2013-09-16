@@ -23,7 +23,8 @@ testProp = (prop) ->
 
 hasSupport = true
 testEl     = document.createElement 'div'
-prefixList = ['webkit', 'Moz', 'o', 'ms']
+prefixList = ['Webkit', 'Moz', 'ms']
+
 
 css =
   transform:      'transform'
