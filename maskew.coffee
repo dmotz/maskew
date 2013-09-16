@@ -2,34 +2,33 @@
 # Skew the shapes of DOM elements
 # Dan Motzenbecker
 # http://oxism.com
-# 0.1.3
+# 0.1.4
 # MIT License
 
 
 {cos, sin, PI, abs, round} = Math
 
-rad = (deg) -> deg * PI / 180
+rad       = (deg) -> deg * PI / 180
 
 getMetric = (style, key) -> parseInt style[key], 10
 
 transform = (y, angle) -> "translate3d(0, #{ y }px, 0) rotate3d(0, 0, 1, #{ angle }deg)"
 
-testProp = (prop) ->
+testProp  = (prop) ->
   return prop if testEl.style[prop]?
-  capProp = prop.charAt(0).toUpperCase() + prop.slice 1
   for prefix in prefixList
-    return key if testEl.style[(key = prefix + capProp)]?
+    return key if testEl.style[(key = prefix + prop.charAt(0).toUpperCase() + prop.slice 1)]?
   false
+
 
 hasSupport = true
 testEl     = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'ms']
 
+css = new ->
+  @[key] = key for key in 'transform transformOrigin transformStyle'.split ' '
+  @
 
-css =
-  transform:      'transform'
-  origin:         'transformOrigin'
-  transformStyle: 'transformStyle'
 
 for key, value of css
   css[key] = testProp value
@@ -70,10 +69,10 @@ class window.Maskew
       @_outerMask.style.display = elStyle.display
 
     @_innerMask = @_outerMask.cloneNode false
-    @_innerMask.style[css.origin] = 'bottom left'
+    @_innerMask.style[css.transformOrigin] = 'bottom left'
 
     @_holder = @_outerMask.cloneNode false
-    @_holder.style[css.origin] = 'inherit'
+    @_holder.style[css.transformOrigin] = 'inherit'
 
     for side in ['Top', 'Right', 'Bottom', 'Left'] then do (key = 'margin' + side) =>
       @_outerMask.style[key] = elStyle[key]
