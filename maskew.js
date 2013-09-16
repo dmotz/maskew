@@ -18,14 +18,13 @@
   };
 
   testProp = function(prop) {
-    var capProp, key, prefix, _i, _len;
+    var key, prefix, _i, _len;
     if (testEl.style[prop] != null) {
       return prop;
     }
-    capProp = prop.charAt(0).toUpperCase() + prop.slice(1);
     for (_i = 0, _len = prefixList.length; _i < _len; _i++) {
       prefix = prefixList[_i];
-      if (testEl.style[(key = prefix + capProp)] != null) {
+      if (testEl.style[(key = prefix + prop.charAt(0).toUpperCase() + prop.slice(1))] != null) {
         return key;
       }
     }
@@ -36,12 +35,16 @@
 
   testEl = document.createElement('div');
 
-  prefixList = ['webkit', 'Moz', 'o', 'ms'];
+  prefixList = ['Webkit', 'Moz', 'ms'];
 
-  css = {
-    transform: 'transform',
-    origin: 'transformOrigin',
-    transformStyle: 'transformStyle'
+  css = new function() {
+    var key, _i, _len, _ref;
+    _ref = 'transform transformOrigin transformStyle'.split(' ');
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      key = _ref[_i];
+      this[key] = key;
+    }
+    return this;
   };
 
   for (key in css) {
@@ -101,9 +104,9 @@
         this._outerMask.style.display = elStyle.display;
       }
       this._innerMask = this._outerMask.cloneNode(false);
-      this._innerMask.style[css.origin] = 'bottom left';
+      this._innerMask.style[css.transformOrigin] = 'bottom left';
       this._holder = this._outerMask.cloneNode(false);
-      this._holder.style[css.origin] = 'inherit';
+      this._holder.style[css.transformOrigin] = 'inherit';
       _ref = ['Top', 'Right', 'Bottom', 'Left'];
       _fn = function(key) {
         return _this._outerMask.style[key] = elStyle[key];

@@ -9,21 +9,20 @@
   text-shadow: none;
 }
 html {
-  font-size: 85%;
+  font-size: 13px;
   background-color: #222;
   font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
 }
 body {
   padding: 3.125rem;
-  max-width: 60rem;
+  width: 58rem;
   margin: 0 auto;
   color: #ccc;
 }
 h1 {
   font-family: Futura, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: bolder;
+  font-weight: normal;
   display: none;
   font-size: 8.75rem;
   background-color: #fff147;
@@ -128,10 +127,10 @@ a:hover {
 }
 pre {
   background-color: #444;
-  color: #ddd;
-  font-size: 1.2rem;
-  margin: 0.8rem;
-  padding: 1rem;
+  color: #eee;
+  font-size: 1rem;
+  margin: 0rem;
+  padding: 0.5rem;
   overflow: auto;
 }
 footer {
