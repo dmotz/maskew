@@ -25,7 +25,7 @@ testDiv = document.createElement 'div'
 testDiv.className = 'maskew-test'
 transformKey = do ->
   return 'transform' if testDiv.style.transform?
-  for prefix in ['webkit', 'Moz', 'o', 'ms']
+  for prefix in ['Webkit', 'Moz', 'ms']
     return key if testDiv.style[(key = prefix + 'Transform')]?
 
 testDiv.style.width           = '200px'
@@ -63,7 +63,7 @@ describe 'Maskew', ->
 
     it 'should create an element with the same margins and padding', ->
       for side in ['Top', 'Right', 'Bottom', 'Left']
-        margin  = 'margin' + side
+        margin  = 'margin'  + side
         padding = 'padding' + side
         expect(dirtyStyle margin).to.equal cleanStyle margin
         expect(testMaskew._el.style[padding]).to.equal cleanStyle padding
