@@ -40,8 +40,8 @@ for key, value of css
 class window.Maskew
 
   constructor: (@_el, @angle, @_options = {}) ->
-    return @ unless hasSupport
-    return new Maskew @_el, @angle unless @ instanceof Maskew
+    return unless hasSupport
+    return new Maskew arguments... unless @ instanceof Maskew
 
     @_options.touch       or= false
     @_options.anchor      or= 'top'
