@@ -19,6 +19,8 @@
 Use it:
 ```javascript
 var maskew = new Maskew(document.getElementById('skew-me'), angle);
+// or
+var maskew = new Maskew('#skew-me', angle);
 ```
 
 With jQuery:
