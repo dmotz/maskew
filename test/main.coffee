@@ -28,13 +28,11 @@ transformKey = do ->
   for prefix in ['Webkit', 'Moz', 'ms']
     return key if testDiv.style[(key = prefix + 'Transform')]?
 
-testDiv.style.width           = '200px'
-testDiv.style.height          = '200px'
-testDiv.style.margin          = '20px'
-testDiv.style.padding         = '20px'
+testDiv.style.width  = testDiv.style.height  = '200px'
+testDiv.style.margin = testDiv.style.padding = '20px'
 testDiv.style.backgroundColor = '#fff'
 testDiv2 = testDiv.cloneNode false
-testDiv2.className = 'maskew-test2'
+testDiv2.className = testClass = 'maskew-test2'
 document.body.appendChild testDiv
 document.body.appendChild testDiv2
 originalParent = testDiv.parentNode
@@ -50,6 +48,12 @@ describe 'Maskew', ->
 
     it 'should return an instance of Maskew', ->
       expect(testMaskew instanceof Maskew).to.equal true
+
+    it 'should correctly return an object when not called with `new`', ->
+      expect(Maskew(testDiv2) instanceof Maskew).to.equal true
+
+    it 'should accept selector strings and use their elements', ->
+      expect((new Maskew '.' + testClass)._el).to.equal testDiv2
 
     it 'should insert an element into the document', ->
       expect(testPresence testMaskew._outerMask).to.equal true
