@@ -70,10 +70,17 @@
       this.destroy = __bind(this.destroy, this);
       this.skew = __bind(this.skew, this);
       if (!hasSupport) {
-        return this;
+        return;
       }
       if (!(this instanceof Maskew)) {
-        return new Maskew(this._el, this.angle);
+        return (function(func, args, ctor) {
+          ctor.prototype = func.prototype;
+          var child = new ctor, result = func.apply(child, args);
+          return Object(result) === result ? result : child;
+        })(Maskew, arguments, function(){});
+      }
+      if (typeof this._el === 'string') {
+        this._el = document.querySelector(this._el);
       }
       (_base = this._options).touch || (_base.touch = false);
       (_base1 = this._options).anchor || (_base1.anchor = 'top');
