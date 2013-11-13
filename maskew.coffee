@@ -42,6 +42,7 @@ class window.Maskew
   constructor: (@_el, @angle, @_options = {}) ->
     return unless hasSupport
     return new Maskew arguments... unless @ instanceof Maskew
+    @_el = document.querySelector @_el if typeof @_el is 'string'
 
     @_options.touch       or= false
     @_options.anchor      or= 'top'
