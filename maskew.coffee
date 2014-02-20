@@ -15,9 +15,9 @@ getMetric = (style, key) -> parseInt style[key], 10
 transform = (y, angle) -> "translate3d(0, #{ y }px, 0) rotate3d(0, 0, 1, #{ angle }deg)"
 
 testProp  = (prop) ->
-  return prop if testEl.style[prop]?
+  return prop if prop of testEl.style
   for prefix in prefixList
-    return key if testEl.style[(key = prefix + prop.charAt(0).toUpperCase() + prop.slice 1)]?
+    return key if (key = prefix + prop.charAt(0).toUpperCase() + prop.slice 1) of testEl.style
   false
 
 
