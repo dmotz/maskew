@@ -6,7 +6,7 @@
 # MIT License
 
 
-{cos, sin, PI, abs, round} = Math
+{cos, sin, PI, abs, round, max} = Math
 
 rad       = (deg) -> deg * PI / 180
 
@@ -96,8 +96,7 @@ class window.Maskew
     cosine  = cos rads
     tlX     = @_height * sine
     tlY     = @_height * cosine
-    adj     = @_width - tlX
-    adj     = 0 if adj < 0
+    adj     = max 0, @_width - tlX
     hyp     = adj / cosine
     opp     = sine * hyp
     yOffset = round @_height - tlY + opp
