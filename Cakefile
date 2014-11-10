@@ -21,10 +21,6 @@ task 'build', 'compile and minify library, build tests, build demo assets', ->
 
 
 task 'watch', 'compile continuously', ->
-  coffee = spawn 'coffee', '-mwc maskew.coffee'.split ' '
-  tests  = spawn 'coffee', '-mwc test/main.coffee'.split ' '
-  stylus = spawn 'stylus', '-u nib -w demo/demo.styl'.split ' '
-
   startWatcher.apply @, pair for pair in [
     ['coffee', '-mwc maskew.coffee']
     ['coffee', '-mwc test/main.coffee']
