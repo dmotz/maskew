@@ -1,0 +1,26 @@
+{
+  "name": "maskew",
+  "version": "0.1.7",
+  "description": "Skew the shapes of elements without distorting their contents",
+  "main": "maskew.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmotz/maskew.git"
+  },
+  "author": {
+    "name": "Dan Motzenbecker",
+    "email": "dan@oxism.com",
+    "url": "http://oxism.com"
+  },
+  "homepage": "http://oxism.com/maskew",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmotz/maskew/issues"
+  },
+  "keywords": [
+    "DOM",
+    "frontend",
+    "skew",
+    "images"
+  ],
+}
