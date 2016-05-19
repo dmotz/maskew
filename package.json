@@ -23,4 +23,7 @@
     "skew",
     "images"
   ],
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  }
 }
