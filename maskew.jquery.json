@@ -2,26 +2,21 @@
   "name": "maskew",
   "title": "Maskew",
   "description": "Skew the shapes of elements without distorting their contents",
-  "keywords": [
-    "effect",
-    "skew",
-    "UI",
-    "touch"
-  ],
-  "version": "0.1.6",
+  "keywords": ["effect", "skew", "UI", "touch"],
+  "version": "0.1.8",
   "author  ": {
     "name": "Dan Motzenbecker",
-    "url": "http://oxism.com"
+    "url": "https://oxism.com"
   },
   "licenses": [
-      {
-        "type": "MIT",
-        "url": "http://opensource.org/licenses/MIT"
-      }
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
   ],
   "bugs": "https://github.com/dmotz/maskew/issues",
-  "homepage": "http://oxism.com/maskew",
-  "docs": "http://oxism.com/maskew",
+  "homepage": "https://oxism.com/maskew",
+  "docs": "https://oxism.com/maskew",
   "dependencies": {
     "jquery": ">=1.5"
   }
