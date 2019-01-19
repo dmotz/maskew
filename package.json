@@ -1,6 +1,6 @@
 {
   "name": "maskew",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Skew the shapes of elements without distorting their contents",
   "main": "maskew.js",
   "repository": {
@@ -10,9 +10,13 @@
   "author": {
     "name": "Dan Motzenbecker",
     "email": "dan@oxism.com",
-    "url": "http://oxism.com"
+    "url": "https://oxism.com"
   },
-  "homepage": "http://oxism.com/maskew",
+  "scripts": {
+    "dev": "cake watch",
+    "build": "cake build"
+  },
+  "homepage": "https://oxism.com/maskew",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dmotz/maskew/issues"
@@ -24,6 +28,9 @@
     "images"
   ],
   "devDependencies": {
-    "coffee-script": "^1.10.0"
+    "coffee-script": "^1.10.0",
+    "nib": "^1.1.2",
+    "stylus": "^0.54.5",
+    "uglify-js": "^3.4.9"
   }
 }
