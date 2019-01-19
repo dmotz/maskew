@@ -2,7 +2,7 @@
 # Skew the shapes of DOM elements
 # Dan Motzenbecker
 # http://oxism.com
-# 0.1.6
+# 0.1.8
 # MIT License
 
 
@@ -37,7 +37,7 @@ for key, value of css
     break
 
 
-class window.Maskew
+class Maskew
 
   constructor: (@_el, @angle, @_options = {}) ->
     return unless hasSupport
@@ -170,12 +170,12 @@ class window.Maskew
   _onTouchLeave: => @_onTouchEnd()
 
 
-  @VERSION: '0.1.6'
+  @VERSION: '0.1.8'
 
   @isSupported: hasSupport
 
 
-if window.jQuery? or window.$?.data?
+if window and (window.jQuery? or window.$?.data?)
 
   $::maskew = (angle, options) ->
 
@@ -199,3 +199,10 @@ if window.jQuery? or window.$?.data?
 
     @
 
+
+if module?.exports
+  module.exports = Maskew
+else if define?.amd
+  define -> Maskew
+else
+  window.Maskew = Maskew
