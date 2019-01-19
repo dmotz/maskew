@@ -1,5 +1,6 @@
-#![Maskew](http://dmotz.github.com/maskew/demo/logo.png)
-#[Maskew](http://dmotz.github.com/maskew)
+<img src="https://oxism.com/assets/images/maskew1.jpg" width="400"/>
+
+# [Maskew](http://dmotz.github.com/maskew)
 #### Skew the shapes of elements without distorting their contents
 
 [Dan Motzenbecker](http://oxism.com), MIT License
@@ -12,7 +13,7 @@
 +  no dependencies
 +  optional jQuery plugin
 
-###[Demos](http://dmotz.github.com/maskew)
+### [Demos](http://dmotz.github.com/maskew)
 
 ### Usage
 
